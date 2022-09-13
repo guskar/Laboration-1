@@ -1,0 +1,31 @@
+{
+  "name": "table-creator",
+  "version": "1.0.0",
+  "description": "1DV610 Lab-1",
+  "main": "inde.js",
+  "type": "module",
+  "browser": "src/js/index.js",
+  "scripts": {
+    "start": " node src/js/index.js",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0"
+  },
+  "contributors": [
+    "Gustav Karlberg <gk222iv@student.lnu.se>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.4",
+    "vite": "^2.6.7"
+  },
+  "eslintConfig": {
+    "extends": "@lnu"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.10"
+  }
+}
