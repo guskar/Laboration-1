@@ -9,15 +9,35 @@ export class ChordCalculator {
    */
   constructor () {
     this.chordScale = ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
+    this.data = {}
   }
 
 /**
  *
  */
-  async getChord (chord) {
+  async getChord (chord, presentation) {
     const response = await fetch(`https://api.uberchord.com/v1/chords/${chord}`)
-    const json = await response.json()
-    return json
+    this.data = await response.json()
+    return this.data
+  }
+
+  /**
+   *
+   */
+  getChordAsString () {
+    let reslutString = ''
+    // removes whitespace
+    const strings = this.data[0].strings.replaceAll(' ', '')
+    for (let i = 0; i < strings.length; i++) {
+      if (strings[i] === 'X') {
+        reslutString += `String ${i + 1} is not played\n`
+      } else if (strings[i] === '0') {
+        reslutString += `String ${i + 1} is played open\n`
+      } else {
+        reslutString += `String ${i + 1} is pressed down on fret nr ${strings[i]}\n`
+      }
+    }
+    return reslutString
   }
 
   /**
@@ -43,7 +63,6 @@ export class ChordCalculator {
    *
    */
   transposeChords (chordArr, stepsToTranspose) {
-    console.log(this.chordScale.length)
     const transposedChordsArr = []
     chordArr.forEach(element => {
       const index = this.chordScale.indexOf(element) + stepsToTranspose

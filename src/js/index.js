@@ -1,13 +1,15 @@
 import { ChordCalculator } from './chordCalculator.js'
 
-const chordCalc = new ChordCalculator()
+const chordCalculator = new ChordCalculator()
 
-const result = await chordCalc.getChord('F_maj7')
-const resultArray = await chordCalc.getChords(['A', 'B', 'C'])
-const similarChords = await chordCalc.getSimilarChords('A')
-const transposedChords = chordCalc.transposeChords(['Bb', 'D', 'G'], 2)
+const chord = await chordCalculator.getChord('G')
+const chordAsText = chordCalculator.getChordAsString('G')
+const resultArray = await chordCalculator.getChords(['A', 'B', 'C'])
+const similarChords = await chordCalculator.getSimilarChords('A')
+const transposedChords = chordCalculator.transposeChords(['Bb', 'D', 'G'], 2)
 
-console.log('result', result)
-console.log('resultArray', resultArray)
-console.log('similarChords', similarChords)
-console.log('transposedChords', transposedChords)
+console.log(chord)
+console.log(chordAsText)
+// console.log('resultArray', resultArray)
+// console.log('similarChords', similarChords)
+// console.log('transposedChords', transposedChords)
