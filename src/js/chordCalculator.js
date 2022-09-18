@@ -1,6 +1,7 @@
 
 import { Fetcher } from './fetcher.js'
 import { ErrorHandler } from './errorHandler.js'
+import { chordTransposer, getChordsThatFitsInKey, createChordStructureObject, createStringFromChordObject } from './helperFunctions.js'
 
 /**
  *
@@ -12,7 +13,6 @@ export class ChordCalculator {
   constructor () {
     this.errorHandler = new ErrorHandler()
     this.fetcher = new Fetcher()
-    this.CHORD_SCALE = ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
     this.data = {}
   }
 
@@ -35,7 +35,7 @@ export class ChordCalculator {
   async getChordAsString (chord) {
     this.errorHandler.errorCheckString(chord)
     this.data = await this.fetcher.fetchData(`https://api.uberchord.com/v1/chords/${chord}`)
-    return this.createStringFromChordObject()
+    return createStringFromChordObject(this.data)
   }
 
   /**
@@ -71,16 +71,9 @@ export class ChordCalculator {
    * @returns {string[]} - the array of transposed chords.
    */
   transposeChords (chordArr, stepsToTranspose) {
-    this.errorHandler.errorCheckArr(chordArr)
+    this.errorHandler.errorCheckArray(chordArr)
     this.errorHandler.errorCheckNumber(stepsToTranspose)
-
-    const transposedChordsArr = []
-    chordArr.forEach(element => {
-      const index = this.CHORD_SCALE.indexOf(element) + stepsToTranspose
-      // what if index goes out of range
-      const moddedIndex = index % this.CHORD_SCALE.length
-      transposedChordsArr.push(this.CHORD_SCALE[moddedIndex])
-    })
+    const transposedChordsArr = chordTransposer(chordArr, stepsToTranspose)
 
     return transposedChordsArr
   }
@@ -93,73 +86,10 @@ export class ChordCalculator {
    */
   getRandomSongStructure (keyChord) {
     this.errorHandler.errorCheckString(keyChord)
+    const chordsThatFitsInKey = getChordsThatFitsInKey(keyChord)
+    this.errorHandler.errorCheckArray(chordsThatFitsInKey)
+    const chordStructureObject = createChordStructureObject(chordsThatFitsInKey)
 
-    const chordsThatFitsInKey = []
-    const indexForKeyChord = this.CHORD_SCALE.indexOf(keyChord)
-    // Added to control what elements we want to pick in the CHORD_SCALE array.
-    let incrementor = indexForKeyChord
-    for (let i = 0; i < 4; i++) {
-      chordsThatFitsInKey.push(this.CHORD_SCALE[incrementor])
-      if (incrementor === indexForKeyChord) {
-        incrementor = (incrementor + 5) % this.CHORD_SCALE.length
-      } else {
-        incrementor = (incrementor + 2) % this.CHORD_SCALE.length
-      }
-    }
-    // Makes the element at that position a minor chord since it has to fit in the key chosen by the user.
-    chordsThatFitsInKey[3] = `${chordsThatFitsInKey[3]}_m`
-    return this.createChordStructureObject(chordsThatFitsInKey)
-  }
-
-  /**
-   * Responsible for creating the songobject.
-   *
-   * @param {string[]} chordsArr - the chordarray to create a songobject from.
-   * @returns {object} - the created songobject to return.
-   */
-  createChordStructureObject (chordsArr) {
-    this.errorHandler.errorCheckArray(chordsArr)
-    const songStructureObject = { verse: [], refrain: [], bridge: [] }
-    for (let i = 0; i < 12; i++) {
-      const index = Math.floor(Math.random() * chordsArr.length)
-      if (songStructureObject.verse.length < 4) {
-        songStructureObject.verse.push(chordsArr[index])
-      } else if (songStructureObject.refrain.length < 4) {
-        songStructureObject.refrain.push(chordsArr[index])
-      } else {
-        songStructureObject.bridge.push(chordsArr[index])
-      }
-    }
-    return songStructureObject
-  }
-
-  /**
-   * Responsible for formating a string frpm chordobject returned from the api.
-   *
-   * @returns {string} - the formated string.
-   */
-  createStringFromChordObject () {
-    const FINGERS_ENUM = {
-      1: 'pointerfinger',
-      2: 'middlefinger',
-      3: 'ringfinger',
-      4: 'littlefinger'
-
-    }
-    let reslutString = ''
-    // removes whitespace
-    const strings = this.data[0].strings.replaceAll(' ', '')
-    const fingers = this.data[0].fingering.replaceAll(' ', '')
-
-    for (let i = 0; i < strings.length; i++) {
-      if (strings[i] === 'X') {
-        reslutString += `String nr: ${i + 1} is not played\n`
-      } else if (strings[i] === '0') {
-        reslutString += `String nr: ${i + 1} is played open\n`
-      } else {
-        reslutString += `String nr: ${i + 1} is pressed down on fret nr: ${strings[i]} by your ${FINGERS_ENUM[fingers[i]]}\n`
-      }
-    }
-    return reslutString
+    return chordStructureObject
   }
 }

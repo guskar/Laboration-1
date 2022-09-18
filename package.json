@@ -6,7 +6,8 @@
   "type": "module",
   "browser": "src/js/index.js",
   "scripts": {
-    "start": " node src/js/index.js",
+    "start": " node example-app/app.js",
+    "test": "npx --node-options=--experimental-vm-modules jest || exit 0",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
@@ -26,6 +27,7 @@
     "extends": "@lnu"
   },
   "dependencies": {
+    "jest": "^29.0.3",
     "node-fetch": "^3.2.10"
   }
 }

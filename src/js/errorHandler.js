@@ -9,7 +9,7 @@ export class ErrorHandler {
    */
   errorCheckString (inputToCheck) {
     if (typeof inputToCheck !== 'string') {
-      throw new Error(`${inputToCheck} is not a string`)
+      throw new Error('The input has to be a string')
     }
   }
 
@@ -19,8 +19,11 @@ export class ErrorHandler {
    * @param {string[]}inputToCheck - the input value to check.
    */
   errorCheckArray (inputToCheck) {
-    if (typeof !inputToCheck.length || Array.isArray(inputToCheck)) {
-      throw new Error('The array is empty or isn´t of type array')
+    if (!inputToCheck.length) {
+      throw new Error('The array is empty')
+    }
+    if (!Array.isArray(inputToCheck)) {
+      throw new Error('The input has to be an array')
     }
   }
 
@@ -31,7 +34,7 @@ export class ErrorHandler {
    */
   errorCheckNumber (inputToCheck) {
     if (typeof inputToCheck !== 'number') {
-      throw new Error(`${inputToCheck} is not a number`)
+      throw new Error('The input has to be a number')
     }
   }
 }
