@@ -2,15 +2,12 @@
   "name": "table-creator",
   "version": "1.0.0",
   "description": "1DV610 Lab-1",
-  "main": "inde.js",
+  "main": "app.js",
   "type": "module",
-  "browser": "src/js/index.js",
   "scripts": {
     "start": " node example-app/app.js",
     "test": "npx --node-options=--experimental-vm-modules jest || exit 0",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
+    "test:coverage": "npx --node-options=--experimental-vm-modules jest --coverage || exit 0",
     "lint": "npx eslint ./src || exit 0",
     "lint:fix": "npx eslint ./src --fix || exit 0"
   },
@@ -20,8 +17,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@lnu/eslint-config": "^1.1.4",
-    "vite": "^2.6.7"
+    "@lnu/eslint-config": "^1.1.4"
   },
   "eslintConfig": {
     "extends": "@lnu"

@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 
 /**
- * A Class that is responsible for fetching data from api.
+ * A Class that is responsible for fetching data from api and return as json.
  */
 export class Fetcher {
   /**

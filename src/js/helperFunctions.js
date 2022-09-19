@@ -11,6 +11,12 @@ export const CHORD_SCALE = ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F'
 
 export const songStructureObject = { verse: [], refrain: [], bridge: [] }
 
+/**
+ * Finds chords to match keychord.
+ *
+ * @param { string } keyChord - The chord to find suitable chords in key for.
+ * @returns {string[]} - the array of chords that fits in key
+ */
 export function getChordsThatFitsInKey (keyChord) {
   const chordsThatFitsInKey = []
   const indexForKeyChord = CHORD_SCALE.indexOf(keyChord)
@@ -29,6 +35,13 @@ export function getChordsThatFitsInKey (keyChord) {
   return chordsThatFitsInKey
 }
 
+/**
+ * Transposes the chords sent in to the method.
+ *
+ * @param {string[]} chordArr - The array of chords to transpose.
+ * @param {number} stepsToTranspose - number of steps to transpose.
+ * @returns {string[]} - the array of transposed chords.
+ */
 export function chordTransposer (chordArr, stepsToTranspose) {
   const transposedChordsArr = []
   chordArr.forEach(element => {
@@ -40,6 +53,12 @@ export function chordTransposer (chordArr, stepsToTranspose) {
   return transposedChordsArr
 }
 
+/**
+ * Creating a songStructureObject.
+ *
+ * @param {string[]} chordsArr - Array of chords.
+ * @returns {object} - The songStructureObject to be returned.
+ */
 export function createChordStructureObject (chordsArr) {
   const songStructureObject = { verse: [], refrain: [], bridge: [] }
   for (let i = 0; i < 12; i++) {
@@ -56,7 +75,7 @@ export function createChordStructureObject (chordsArr) {
 }
 
 /**
- * Responsible for formating a string frpm chordobject returned from the api.
+ * Responsible for formating a string from chordobject returned from the api.
  *
  * @param {object} data - the data to transform to string.
  * @returns {string} - the formated string.

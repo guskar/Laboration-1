@@ -43,10 +43,20 @@ test('TwoChordsObject assignment', async () => {
   ])
 })
 
+test('TwoChordsObject assignment to throw error', async () => {
+  const chordCalculator = new ChordCalculator()
+  await expect(chordCalculator.getChords([])).rejects.toThrow(Error)
+})
+
 test('chordString assignment', async () => {
   const chordCalculator = new ChordCalculator()
   const chordString = await chordCalculator.getChordAsString('G')
   expect(chordString).toContain('String nr: 1 is pressed down on fret nr: 3 by your middlefinger\nString nr: 2 is pressed down on fret nr: 2 by your pointerfinger\nString nr: 3 is played open\nString nr: 4 is played open\nString nr: 5 is pressed down on fret nr: 3 by your ringfinger\nString nr: 6 is pressed down on fret nr: 3 by your littlefinger')
+})
+
+test('chordstring assignment to throw error', async () => {
+  const chordCalculator = new ChordCalculator()
+  await expect(chordCalculator.getChordAsString(1)).rejects.toThrow(Error)
 })
 
 test('transposedChordsArray assignment', () => {
@@ -55,13 +65,28 @@ test('transposedChordsArray assignment', () => {
   expect(chordObject).toEqual(['C', 'E', 'A'])
 })
 
+test('transposedChordsArray assignment to throw error', () => {
+  const chordCalculator = new ChordCalculator()
+  expect(() => chordCalculator.transposeChords([])).toThrow(Error)
+})
+
 test('songStructureObject assignment', () => {
   const chordCalculator = new ChordCalculator()
   const chordObject = chordCalculator.getRandomSongStructure('C')
   expect(chordObject).toHaveProperty('verse', 'refrain', 'bridge')
 })
 
+test('songStructureObject assignment to throw error', () => {
+  const chordCalculator = new ChordCalculator()
+  expect(() => chordCalculator.getRandomSongStructure(1)).toThrow(Error)
+})
+
 test('chordsThatFitsInKeyArray assignment', () => {
   const chordsThatFitsInKey = getChordsThatFitsInKey('C')
   expect(chordsThatFitsInKey).toEqual(['C', 'F', 'G', 'A_m'])
+})
+
+test('chordsThatFitsInKeyArray assignment to throw error', () => {
+  const chordCalculator = new ChordCalculator()
+  expect(() => chordCalculator.getChordsThatFitsInKey(1)).toThrow(Error)
 })

@@ -82,7 +82,7 @@ export class ChordCalculator {
    * Picks out chords in the right key and creates a song object from it.
    *
    * @param {string} keyChord - The chord to form a songstructure from.
-   * @returns {object} - the song object created from hte keychord.
+   * @returns {object} - the song object created from the keychord.
    */
   getRandomSongStructure (keyChord) {
     this.errorHandler.errorCheckString(keyChord)
