@@ -42,12 +42,12 @@ export function getChordsThatFitsInKey (keyChord) {
  * @param {number} stepsToTranspose - number of steps to transpose.
  * @returns {string[]} - the array of transposed chords.
  */
-export function chordTransposer (chordArr, stepsToTranspose) {
+export function createTransposedChordsArr (chordArr, stepsToTranspose) {
   const transposedChordsArr = []
   chordArr.forEach(element => {
-    const index = CHORD_SCALE.indexOf(element) + stepsToTranspose
+    const transposeIndex = CHORD_SCALE.indexOf(element) + stepsToTranspose
     // what if index goes out of range
-    const moddedIndex = index % CHORD_SCALE.length
+    const moddedIndex = transposeIndex % CHORD_SCALE.length
     transposedChordsArr.push(CHORD_SCALE[moddedIndex])
   })
   return transposedChordsArr

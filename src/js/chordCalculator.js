@@ -1,19 +1,22 @@
 
 import { Fetcher } from './fetcher.js'
 import { ErrorHandler } from './errorHandler.js'
-import { chordTransposer, getChordsThatFitsInKey, createChordStructureObject, createStringFromChordObject } from './helperFunctions.js'
+import { createTransposedChordsArr, getChordsThatFitsInKey, createChordStructureObject, createStringFromChordObject } from './helperFunctions.js'
 
 /**
- *
+ * The chordCalculator class.
  */
 export class ChordCalculator {
+  #errorHandler
+  #fetcher
+  #data
   /**
    * Creates an instance of the current object.
    */
   constructor () {
-    this.errorHandler = new ErrorHandler()
-    this.fetcher = new Fetcher()
-    this.data = {}
+    this.#errorHandler = new ErrorHandler()
+    this.#fetcher = new Fetcher()
+    this.#data = {}
   }
 
   /**
@@ -22,9 +25,9 @@ export class ChordCalculator {
    * @param {string} chord - the chord to search for.
    */
   async getChord (chord) {
-    this.errorHandler.errorCheckString(chord)
-    this.data = await this.fetcher.fetchData(`https://api.uberchord.com/v1/chords/${chord}`)
-    return this.data
+    this.#errorHandler.errorCheckString(chord)
+    this.#data = await this.#fetcher.fetchData(`https://api.uberchord.com/v1/chords/${chord}`)
+    return this.#data
   }
 
   /**
@@ -33,9 +36,9 @@ export class ChordCalculator {
    * @param {string} chord - the input to search for.
    */
   async getChordAsString (chord) {
-    this.errorHandler.errorCheckString(chord)
-    this.data = await this.fetcher.fetchData(`https://api.uberchord.com/v1/chords/${chord}`)
-    return createStringFromChordObject(this.data)
+    this.#errorHandler.errorCheckString(chord)
+    this.#data = await this.#fetcher.fetchData(`https://api.uberchord.com/v1/chords/${chord}`)
+    return createStringFromChordObject(this.#data)
   }
 
   /**
@@ -44,11 +47,17 @@ export class ChordCalculator {
    * @param {string[]} chordsArr - the input to search for.
    */
   async getChords (chordsArr) {
-    this.errorHandler.errorCheckArray(chordsArr)
+    let url = 'https://api.uberchord.com/v1/chords/'
 
-    const [chord1, chord2, chord3] = chordsArr
-    this.data = await this.fetcher.fetchData(`https://api.uberchord.com/v1/chords/${chord1},${chord2},${chord3}`)
-    return this.data
+    chordsArr.forEach(element => {
+      url += `${element},`
+    })
+
+    this.#errorHandler.errorCheckArray(chordsArr)
+    this.#errorHandler.errorCheckArrayLength(chordsArr)
+
+    this.#data = await this.#fetcher.fetchData(url)
+    return this.#data
   }
 
   /**
@@ -57,10 +66,10 @@ export class ChordCalculator {
    * @param {string} chord - the input to search for.
    */
   async getSimilarChords (chord) {
-    this.errorHandler.errorCheckString(chord)
+    this.#errorHandler.errorCheckString(chord)
 
-    this.data = await this.fetcher.fetchData(`https://api.uberchord.com/v1/chords?nameLike=${chord}`)
-    return this.data
+    this.#data = await this.#fetcher.fetchData(`https://api.uberchord.com/v1/chords?nameLike=${chord}`)
+    return this.#data
   }
 
   /**
@@ -71,9 +80,12 @@ export class ChordCalculator {
    * @returns {string[]} - the array of transposed chords.
    */
   transposeChords (chordArr, stepsToTranspose) {
-    this.errorHandler.errorCheckArray(chordArr)
-    this.errorHandler.errorCheckNumber(stepsToTranspose)
-    const transposedChordsArr = chordTransposer(chordArr, stepsToTranspose)
+    chordArr.forEach(element => {
+      this.#errorHandler.errorCheckChord(element)
+    })
+    this.#errorHandler.errorCheckArray(chordArr)
+    this.#errorHandler.errorCheckNumber(stepsToTranspose)
+    const transposedChordsArr = createTransposedChordsArr(chordArr, stepsToTranspose)
 
     return transposedChordsArr
   }
@@ -85,9 +97,9 @@ export class ChordCalculator {
    * @returns {object} - the song object created from the keychord.
    */
   getRandomSongStructure (keyChord) {
-    this.errorHandler.errorCheckString(keyChord)
+    this.#errorHandler.errorCheckChord(keyChord)
+    this.#errorHandler.errorCheckString(keyChord)
     const chordsThatFitsInKey = getChordsThatFitsInKey(keyChord)
-    this.errorHandler.errorCheckArray(chordsThatFitsInKey)
     const chordStructureObject = createChordStructureObject(chordsThatFitsInKey)
 
     return chordStructureObject
