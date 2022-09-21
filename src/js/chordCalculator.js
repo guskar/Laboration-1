@@ -80,9 +80,6 @@ export class ChordCalculator {
    * @returns {string[]} - the array of transposed chords.
    */
   transposeChords (chordArr, stepsToTranspose) {
-    chordArr.forEach(element => {
-      this.#errorHandler.errorCheckChord(element)
-    })
     this.#errorHandler.errorCheckArray(chordArr)
     this.#errorHandler.errorCheckNumber(stepsToTranspose)
     const transposedChordsArr = createTransposedChordsArr(chordArr, stepsToTranspose)
@@ -97,8 +94,8 @@ export class ChordCalculator {
    * @returns {object} - the song object created from the keychord.
    */
   getRandomSongStructure (keyChord) {
-    this.#errorHandler.errorCheckChord(keyChord)
     this.#errorHandler.errorCheckString(keyChord)
+    this.#errorHandler.errorCheckChord(keyChord)
     const chordsThatFitsInKey = getChordsThatFitsInKey(keyChord)
     const chordStructureObject = createChordStructureObject(chordsThatFitsInKey)
 

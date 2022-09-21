@@ -1,11 +1,11 @@
 
-export const FINGERS_ENUM = {
+export const FINGERS_ENUM = Object.freeze({
   1: 'pointerfinger',
   2: 'middlefinger',
   3: 'ringfinger',
   4: 'littlefinger'
 
-}
+})
 
 export const CHORD_SCALE = ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
 
@@ -20,7 +20,8 @@ export const songStructureObject = { verse: [], refrain: [], bridge: [] }
 export function getChordsThatFitsInKey (keyChord) {
   const chordsThatFitsInKey = []
   const indexForKeyChord = CHORD_SCALE.indexOf(keyChord)
-  // Added to control what elements we want to pick in the CHORD_SCALE array.
+
+  // incrementor added to control what elements we want to pick in the CHORD_SCALE array.
   let incrementor = indexForKeyChord
   for (let i = 0; i < 4; i++) {
     chordsThatFitsInKey.push(CHORD_SCALE[incrementor])
@@ -44,9 +45,10 @@ export function getChordsThatFitsInKey (keyChord) {
  */
 export function createTransposedChordsArr (chordArr, stepsToTranspose) {
   const transposedChordsArr = []
+
   chordArr.forEach(element => {
     const transposeIndex = CHORD_SCALE.indexOf(element) + stepsToTranspose
-    // what if index goes out of range
+    // meddedIndex added to controll that index cant go out of range
     const moddedIndex = transposeIndex % CHORD_SCALE.length
     transposedChordsArr.push(CHORD_SCALE[moddedIndex])
   })
@@ -61,6 +63,7 @@ export function createTransposedChordsArr (chordArr, stepsToTranspose) {
  */
 export function createChordStructureObject (chordsArr) {
   const songStructureObject = { verse: [], refrain: [], bridge: [] }
+
   for (let i = 0; i < 12; i++) {
     const index = Math.floor(Math.random() * chordsArr.length)
     if (songStructureObject.verse.length < 4) {
@@ -83,16 +86,16 @@ export function createChordStructureObject (chordsArr) {
 export function createStringFromChordObject (data) {
   let reslutString = ''
   // removes whitespace
-  const strings = data[0].strings.replaceAll(' ', '')
+  const guitarStrings = data[0].strings.replaceAll(' ', '')
   const fingers = data[0].fingering.replaceAll(' ', '')
 
-  for (let i = 0; i < strings.length; i++) {
-    if (strings[i] === 'X') {
+  for (let i = 0; i < guitarStrings.length; i++) {
+    if (guitarStrings[i] === 'X') {
       reslutString += `String nr: ${i + 1} is not played\n`
-    } else if (strings[i] === '0') {
+    } else if (guitarStrings[i] === '0') {
       reslutString += `String nr: ${i + 1} is played open\n`
     } else {
-      reslutString += `String nr: ${i + 1} is pressed down on fret nr: ${strings[i]} by your ${FINGERS_ENUM[fingers[i]]}\n`
+      reslutString += `Place your ${FINGERS_ENUM[fingers[i]]} on string nr: ${i + 1} on fret nr: ${guitarStrings[i]}\n`
     }
   }
   return reslutString

@@ -5,17 +5,17 @@ const chordCalculator = new ChordCalculator()
 try {
   // const chord = await chordCalculator.getChord('G')
   // const chordString = await chordCalculator.getChordAsString('Bb')
-  const chords = await chordCalculator.getChords(['G', 'D', 'Ab'])
+  // const chords = await chordCalculator.getChords(['G', 'F', 'Ab'])
   // const similarChords = await chordCalculator.getSimilarChords('A')
-  // const transposedChords = chordCalculator.transposeChords(['Bb', 'D', 'G'], 2)
-  // const randomSongStructure = chordCalculator.getRandomSongStructure('C_m')
+  // const transposedChords = chordCalculator.transposeChords(['Bb', 'D', 'G'], 4)
+  const randomSongStructure = chordCalculator.getRandomSongStructure('F')
 
   // console.log('chord', chord)
-  // console.log(chordString)
-  console.log('chords', chords)
+  // console.log('chordString', chordString)
+  // console.log('chords', chords)
   // console.log('similarChords', similarChords)
   // console.log('transposedChords', transposedChords)
-  // console.log('randomSongStructure', randomSongStructure)
+  console.log('randomSongStructure', randomSongStructure)
 } catch (error) {
   console.log(error.message)
 }

@@ -5,9 +5,11 @@ Bara att komma fram till vilken typ av bibliotek jag ville bygga tog mig några 
 
 Något jag lärt mig av den här laborationen är att dela upp koden i mindre metoder. Att de metoder som finns på min huvudklass helt enkelt i stort sett bara anropar andra helperFunctions vilket gör det tydligare vad mina huvudmetoder gör. I kombination med tydlig namngivning tycker jag att jag lyckats med detta utifrån den nivå jag ligger på nu.
 
-Namnändringar på funktioner och variabler har också kommit naturligare under kodningens gång då det blir tydligare vad varje metod gör och inte gör.
+Namnändringar på funktioner och variabler har också kommit naturligare under kodningens gång då det blir tydligare vad varje metod gör och inte gör. En sak jag märkte var att jag vid några tillfällen behövde döpa om variabler eftersom ämnesspecifika ord från musikvärlden och programmeringsvärlden krockade ibland. Två exempel på detta är string och key vilket gjorde att jag fick döpa om dessa.
 
 Vad det gäller abstraktionsnivåer som tas upp i boken tycker jag ibland att det är svårt att hålla sig till detta. I min kod blandar jag exempelvis olika koncept såsom att slumpa nummer och formatera ett objekt jag vill returnera i samma metod. Så där finns det absolut mer att göra vad det gäller att bryta ut kod.
+
+Eftersom uppgiften också till stor del handlar om att kommunicera informationen om biblioteket till en programmerare så har jag blivit mer medveten om dokumentationens vikt. Exempelvis känns en ordlista med områdesspecifika ord viktig för att förstå mitt bibliotek. En tydlig instruktion av hur biblioteket används blir också av största vikt.
 
 
 
@@ -20,7 +22,7 @@ Vad det gäller abstraktionsnivåer som tas upp i boken tycker jag ibland att de
 | **getChord** - metod som fetchar ett API och sedan returnerar json. |  **Pick one word per concept** - Namnet getChord följer egentligen inte konceptet "Pick one word per consept" då metoden i sig använder sig av en fetcher så egentligen kanske fetchChord skulle kunna vara ett mer passande namn.
 | **indexOfKeyChord** - Variabel som används för att kontrollera vilket index vi vill plocka ut ur en array. |  **Use Intention revealing names** - Här hade jag kunnat döpa variabeln till index men för att följa regeln kring detta i Clean code så använder jag ett namn som svarar på frågor kring vad variabeln har för funktion i metoden.
 | **errorCheckString** - Validerar om input är en string. |  **Descreiptive names** - Här tycker jag att namnet istället skulle kunna vara validateArray då namnet beskriver bättre vad metoden fasktiskt gör.
-| **keyChord** - Namn på argument som skickas till flera metoder. | **Avoid Disinformation** - Att namnet har ordet key i sig skulle kunna vara förvirrande då key är ett variabelnamn som används av programmerare men som i detta fall refererar till "tonart" som är något specifikt för området musikteori. Därför bör detta specificeras i en ordlista.
+| **keyChord** - Namn på argument som skickas till flera metoder. | **Avoid Disinformation** - Att namnet har ordet key i sig skulle kunna vara förvirrande då key är ett variabelnamn som används av programmerare men som i detta fall refererar till "tonart" som är något specifikt för området musikteori. Därför bör detta specificeras i en ordlista. Ett annat namn som blir förvirrande är strings när vi talar om gitarrsträngar
 ***
 
 ## Clean Code, kapitel 3: funktioner
