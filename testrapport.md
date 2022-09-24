@@ -4,7 +4,7 @@ För att testa min modul använder jag mig av automatiska enhetstester(end-to-en
 
 Alla tester körs med kommandot `npm test` och ger ett testresultat i konsollen. Alternativt `npm run test:coverage` för utförligare information om testerna.
 
- <img src="images/test.png" width="700" >
+ <img src="images/testrapport.png" width="700" >
 
  # Överblick chordProvider.test.js
 
@@ -22,7 +22,7 @@ Alla tester körs med kommandot `npm test` och ger ett testresultat i konsollen.
 
 # transposeChords
 
-<img src="images/transposechords.png" width="700" >
+<img src="images/transposedchords.png" width="700" >
 
 # getRandomChordStructure
 

@@ -67,13 +67,13 @@ test('transposedChordsArray assignment to throw error', () => {
 test('songStructureObject assignment', () => {
   const chordObject = chordProvider.getRandomSongStructure('C')
   const chordsThatFitsInKeyArray = createChordsThatFitsInKeyArr('C')
-  const values = Object.keys(chordObject)
-  for (const value in values) {
+  const keys = Object.keys(chordObject)
+  for (const value in keys) {
     for (let i = 0; i < value.length; i++) {
-      expect(() => values.some(chordsThatFitsInKeyArray)).toBeTruthy()
+      expect(() => chordsThatFitsInKeyArray.some(value[i])).toBeTruthy()
     }
   }
-  expect(chordObject).toHaveProperty('verse', 'refrain', 'bridge')
+  expect(chordObject).toHaveProperty('verse', 'chorus', 'bridge')
 })
 
 test('songStructureObject assignment to throw error', () => {

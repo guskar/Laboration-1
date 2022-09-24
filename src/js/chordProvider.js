@@ -43,7 +43,6 @@ export class ChordProvider {
     })
 
     this.#errorHandler.errorCheckArray(chordsArr)
-    // this.#errorHandler.errorCheckArrayLength(chordsArr)
 
     this.#data = await this.#fetcher.fetchData(url)
     return this.#data

@@ -60,14 +60,14 @@ export function createTransposedChordsArr (chordArr, stepsToTranspose) {
  * @returns {object} - The songStructureObject to be returned.
  */
 export function createChordStructureObject (chordsArr) {
-  const songStructureObject = { verse: [], refrain: [], bridge: [] }
+  const songStructureObject = { verse: [], chorus: [], bridge: [] }
 
   for (let i = 0; i < 12; i++) {
     const randomIndex = Math.floor(Math.random() * chordsArr.length)
     if (songStructureObject.verse.length < 4) {
       songStructureObject.verse.push(chordsArr[randomIndex])
-    } else if (songStructureObject.refrain.length < 4) {
-      songStructureObject.refrain.push(chordsArr[randomIndex])
+    } else if (songStructureObject.chorus.length < 4) {
+      songStructureObject.chorus.push(chordsArr[randomIndex])
     } else {
       songStructureObject.bridge.push(chordsArr[randomIndex])
     }

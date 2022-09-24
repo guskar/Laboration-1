@@ -16,6 +16,9 @@ CHORD_SCALE = ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
   <li>String: gitarrsträng</li>
   <li>Fret: Greppband(metallband längs greppbrädet på gitarren)</li>
    <li>Transpose: Transponera(Transponering av musik innebär att man flyttar en fras, del av stycke eller hela verk uppåt eller nedåt i tonhöjd så att de inbördes intervallen inte ändras men hela området byter tonart.)</li>
+   <li>Verse: Vers i en sångstruktur</li>
+   <li>Chorus: Refräng i en låtstruktur</li>
+   <li>Bridge: Brygga i en låtstruktur(brygga inom populärmusik avser oftast den del som kan komma mellan en kompositions verser och refränger) </li>
 </ul>
 
 
