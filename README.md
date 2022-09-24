@@ -5,6 +5,7 @@ The module also provides the possibility for you to get the chord as a string wi
 
 Chords to choose as input are:  
 ```
+//helferFunctions.js
 CHORD_SCALE = ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
 ```
 
@@ -22,6 +23,20 @@ CHORD_SCALE = ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
 
 ```
 npm install
+```
+## Run example-app
+
+```
+npm start
+```
+
+## Dependencies
+
+```
+"dependencies": {
+    "jest": "^29.0.3",
+    "node-fetch": "^3.2.10"
+  }
 ```
 
 ## Usage
@@ -53,7 +68,7 @@ Params:
 string: A string representing the chord to fetch
 
 Throws:
-Error: Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
+Error Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
 
 ### Example
 
@@ -72,7 +87,7 @@ Params:
 string[]: An array of strings representing the chords to fetch.
 
 Throws:
-Error: Will be thrown if the array is empty/has more tha three elements/if the elements isn´t in CHORD_SCALE.
+Error Will be thrown if the array is empty/has more tha three elements/if the elements isn´t in CHORD_SCALE.
 
 ### Example
 
@@ -91,7 +106,7 @@ Params:
 string: A string representing the chord to fetch.
 
 Throws:
-Error: Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
+Error Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
 
 ### Example
 
@@ -110,7 +125,7 @@ Params:
 string: A string representing the chord to get similar chords for.
 
 Throws:
-Error: Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
+Error Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
 
 ### Example
 
@@ -130,7 +145,7 @@ string[]: An array of strings representing the chords to transpose.
 number: A number representing number of steps to transpose chords.
 
 Throws:
-Error: Will be thrown if argument is not of type array/array is empty/chords isn´t in CHORD-SCALE/isn´t of type number between 1-11.
+Error Will be thrown if argument is not of type array/array is empty/chords isn´t in CHORD-SCALE/isn´t of type number between 1-11.
 
 ### Example
 
@@ -149,7 +164,7 @@ Params:
 string: A string representing the key to get a random song-structure for.
 
 Throws:
-Error: Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
+Error Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
 
 ### Example
 

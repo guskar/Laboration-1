@@ -1,6 +1,6 @@
 
 import { ChordCalculator } from '../chordCalculator.js'
-import { getChordsThatFitsInKey } from '../helperFunctions.js'
+import { CHORD_SCALE, createChordsThatFitsInKeyArr } from '../helperFunctions.js'
 
 test('chordObject assignment', async () => {
   const chordCalculator = new ChordCalculator()
@@ -50,8 +50,8 @@ test('TwoChordsObject assignment to throw error', async () => {
 
 test('chordString assignment', async () => {
   const chordCalculator = new ChordCalculator()
-  const chordString = await chordCalculator.getChordAsString('G')
-  expect(chordString).toContain('String nr: 1 is pressed down on fret nr: 3 by your middlefinger\nString nr: 2 is pressed down on fret nr: 2 by your pointerfinger\nString nr: 3 is played open\nString nr: 4 is played open\nString nr: 5 is pressed down on fret nr: 3 by your ringfinger\nString nr: 6 is pressed down on fret nr: 3 by your littlefinger')
+  const chordString = await chordCalculator.getChordAsString('Bb')
+  expect(chordString).toContain('String nr: 1 is not played\nPlace your pointerfinger on string nr: 2 on fret nr: 1\nPlace your middlefinger on string nr: 3 on fret nr: 3\nPlace your ringfinger on string nr: 4 on fret nr: 3\nPlace your littlefinger on string nr: 5 on fret nr: 3\nPlace your pointerfinger on string nr: 6 on fret nr: 1')
 })
 
 test('chordstring assignment to throw error', async () => {
@@ -61,18 +61,25 @@ test('chordstring assignment to throw error', async () => {
 
 test('transposedChordsArray assignment', () => {
   const chordCalculator = new ChordCalculator()
-  const chordObject = chordCalculator.transposeChords(['Bb', 'D', 'G'], 2)
+  const chordObject = chordCalculator.getTransposedChords(['Bb', 'D', 'G'], 2)
   expect(chordObject).toEqual(['C', 'E', 'A'])
 })
 
 test('transposedChordsArray assignment to throw error', () => {
   const chordCalculator = new ChordCalculator()
-  expect(() => chordCalculator.transposeChords([])).toThrow(Error)
+  expect(() => chordCalculator.getTransposedChords([])).toThrow(Error)
 })
 
 test('songStructureObject assignment', () => {
   const chordCalculator = new ChordCalculator()
   const chordObject = chordCalculator.getRandomSongStructure('C')
+  const chordsThatFitsInKeyArray = createChordsThatFitsInKeyArr('C')
+  const values = Object.keys(chordObject)
+  for (const value in values) {
+    for (let i = 0; i < value.length; i++) {
+      expect(() => values.some(chordsThatFitsInKeyArray)).toBeTruthy()
+    }
+  }
   expect(chordObject).toHaveProperty('verse', 'refrain', 'bridge')
 })
 
@@ -82,7 +89,7 @@ test('songStructureObject assignment to throw error', () => {
 })
 
 test('chordsThatFitsInKeyArray assignment', () => {
-  const chordsThatFitsInKey = getChordsThatFitsInKey('C')
+  const chordsThatFitsInKey = createChordsThatFitsInKeyArr('C')
   expect(chordsThatFitsInKey).toEqual(['C', 'F', 'G', 'A_m'])
 })
 

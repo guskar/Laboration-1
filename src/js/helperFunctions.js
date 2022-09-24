@@ -7,9 +7,7 @@ export const FINGERS_ENUM = Object.freeze({
 
 })
 
-export const CHORD_SCALE = ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
-
-export const songStructureObject = { verse: [], refrain: [], bridge: [] }
+export const CHORD_SCALE = Object.freeze(['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G'])
 
 /**
  * Finds chords to match keychord.
@@ -17,7 +15,7 @@ export const songStructureObject = { verse: [], refrain: [], bridge: [] }
  * @param { string } keyChord - The chord to find suitable chords in key for.
  * @returns {string[]} - the array of chords that fits in key
  */
-export function getChordsThatFitsInKey (keyChord) {
+export function createChordsThatFitsInKeyArr (keyChord) {
   const chordsThatFitsInKey = []
   const indexForKeyChord = CHORD_SCALE.indexOf(keyChord)
 
@@ -65,13 +63,13 @@ export function createChordStructureObject (chordsArr) {
   const songStructureObject = { verse: [], refrain: [], bridge: [] }
 
   for (let i = 0; i < 12; i++) {
-    const index = Math.floor(Math.random() * chordsArr.length)
+    const randomIndex = Math.floor(Math.random() * chordsArr.length)
     if (songStructureObject.verse.length < 4) {
-      songStructureObject.verse.push(chordsArr[index])
+      songStructureObject.verse.push(chordsArr[randomIndex])
     } else if (songStructureObject.refrain.length < 4) {
-      songStructureObject.refrain.push(chordsArr[index])
+      songStructureObject.refrain.push(chordsArr[randomIndex])
     } else {
-      songStructureObject.bridge.push(chordsArr[index])
+      songStructureObject.bridge.push(chordsArr[randomIndex])
     }
   }
   return songStructureObject
@@ -84,19 +82,19 @@ export function createChordStructureObject (chordsArr) {
  * @returns {string} - the formated string.
  */
 export function createStringFromChordObject (data) {
-  let reslutString = ''
+  let chordString = ''
   // removes whitespace
   const guitarStrings = data[0].strings.replaceAll(' ', '')
   const fingers = data[0].fingering.replaceAll(' ', '')
 
   for (let i = 0; i < guitarStrings.length; i++) {
     if (guitarStrings[i] === 'X') {
-      reslutString += `String nr: ${i + 1} is not played\n`
+      chordString += `String nr: ${i + 1} is not played\n`
     } else if (guitarStrings[i] === '0') {
-      reslutString += `String nr: ${i + 1} is played open\n`
+      chordString += `String nr: ${i + 1} is played open\n`
     } else {
-      reslutString += `Place your ${FINGERS_ENUM[fingers[i]]} on string nr: ${i + 1} on fret nr: ${guitarStrings[i]}\n`
+      chordString += `Place your ${FINGERS_ENUM[fingers[i]]} on string nr: ${i + 1} on fret nr: ${guitarStrings[i]}\n`
     }
   }
-  return reslutString
+  return chordString
 }
