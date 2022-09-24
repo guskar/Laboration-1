@@ -6,7 +6,7 @@ Alla tester körs med kommandot `npm test` och ger ett testresultat i konsollen.
 
  <img src="images/test.png" width="700" >
 
- # Överblick chordCalulator.test.js
+ # Överblick chordProvider.test.js
 
  # getChord
 

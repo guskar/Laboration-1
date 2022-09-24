@@ -6,7 +6,7 @@ import { createTransposedChordsArr, createChordsThatFitsInKeyArr, createChordStr
 /**
  * The chordCalculator class.
  */
-export class ChordCalculator {
+export class ChordProvider {
   #errorHandler
   #fetcher
   #data
@@ -43,7 +43,7 @@ export class ChordCalculator {
     })
 
     this.#errorHandler.errorCheckArray(chordsArr)
-    this.#errorHandler.errorCheckArrayLength(chordsArr)
+    // this.#errorHandler.errorCheckArrayLength(chordsArr)
 
     this.#data = await this.#fetcher.fetchData(url)
     return this.#data

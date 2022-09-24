@@ -1,10 +1,11 @@
 
-import { ChordCalculator } from '../chordCalculator.js'
-import { CHORD_SCALE, createChordsThatFitsInKeyArr } from '../helperFunctions.js'
+import { ChordProvider } from '../chordProvider.js'
+import { createChordsThatFitsInKeyArr } from '../helperFunctions.js'
+
+const chordProvider = new ChordProvider()
 
 test('chordObject assignment', async () => {
-  const chordCalculator = new ChordCalculator()
-  const chordObject = await chordCalculator.getChord('G')
+  const chordObject = await chordProvider.getChord('G')
   expect(chordObject).toEqual([{
     strings: '3 2 0 0 3 3',
     fingering: '2 1 X X 3 4',
@@ -16,13 +17,11 @@ test('chordObject assignment', async () => {
 })
 
 test('chordObject assignment to throw error', async () => {
-  const chordCalculator = new ChordCalculator()
-  await expect(chordCalculator.getChord(1)).rejects.toThrow(Error)
+  await expect(chordProvider.getChord(1)).rejects.toThrow(Error)
 })
 
 test('TwoChordsObject assignment', async () => {
-  const chordCalculator = new ChordCalculator()
-  const twoChordsObject = await chordCalculator.getChords(['G', 'D'])
+  const twoChordsObject = await chordProvider.getChords(['G', 'D'])
   expect(twoChordsObject).toEqual([
     {
       strings: '3 2 0 0 3 3',
@@ -44,35 +43,29 @@ test('TwoChordsObject assignment', async () => {
 })
 
 test('TwoChordsObject assignment to throw error', async () => {
-  const chordCalculator = new ChordCalculator()
-  await expect(chordCalculator.getChords([])).rejects.toThrow(Error)
+  await expect(chordProvider.getChords([])).rejects.toThrow(Error)
 })
 
 test('chordString assignment', async () => {
-  const chordCalculator = new ChordCalculator()
-  const chordString = await chordCalculator.getChordAsString('Bb')
+  const chordString = await chordProvider.getChordAsString('Bb')
   expect(chordString).toContain('String nr: 1 is not played\nPlace your pointerfinger on string nr: 2 on fret nr: 1\nPlace your middlefinger on string nr: 3 on fret nr: 3\nPlace your ringfinger on string nr: 4 on fret nr: 3\nPlace your littlefinger on string nr: 5 on fret nr: 3\nPlace your pointerfinger on string nr: 6 on fret nr: 1')
 })
 
 test('chordstring assignment to throw error', async () => {
-  const chordCalculator = new ChordCalculator()
-  await expect(chordCalculator.getChordAsString(1)).rejects.toThrow(Error)
+  await expect(chordProvider.getChordAsString(1)).rejects.toThrow(Error)
 })
 
 test('transposedChordsArray assignment', () => {
-  const chordCalculator = new ChordCalculator()
-  const chordObject = chordCalculator.getTransposedChords(['Bb', 'D', 'G'], 2)
+  const chordObject = chordProvider.getTransposedChords(['Bb', 'D', 'G'], 2)
   expect(chordObject).toEqual(['C', 'E', 'A'])
 })
 
 test('transposedChordsArray assignment to throw error', () => {
-  const chordCalculator = new ChordCalculator()
-  expect(() => chordCalculator.getTransposedChords([])).toThrow(Error)
+  expect(() => chordProvider.getTransposedChords([])).toThrow(Error)
 })
 
 test('songStructureObject assignment', () => {
-  const chordCalculator = new ChordCalculator()
-  const chordObject = chordCalculator.getRandomSongStructure('C')
+  const chordObject = chordProvider.getRandomSongStructure('C')
   const chordsThatFitsInKeyArray = createChordsThatFitsInKeyArr('C')
   const values = Object.keys(chordObject)
   for (const value in values) {
@@ -84,8 +77,7 @@ test('songStructureObject assignment', () => {
 })
 
 test('songStructureObject assignment to throw error', () => {
-  const chordCalculator = new ChordCalculator()
-  expect(() => chordCalculator.getRandomSongStructure(1)).toThrow(Error)
+  expect(() => chordProvider.getRandomSongStructure(1)).toThrow(Error)
 })
 
 test('chordsThatFitsInKeyArray assignment', () => {
@@ -94,6 +86,5 @@ test('chordsThatFitsInKeyArray assignment', () => {
 })
 
 test('chordsThatFitsInKeyArray assignment to throw error', () => {
-  const chordCalculator = new ChordCalculator()
-  expect(() => chordCalculator.getChordsThatFitsInKey(1)).toThrow(Error)
+  expect(() => chordProvider.getChordsThatFitsInKey(1)).toThrow(Error)
 })

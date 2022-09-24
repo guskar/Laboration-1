@@ -36,18 +36,6 @@ export class ErrorHandler {
   }
 
   /**
-   * Checks if input is of type Array has more tha 3 elements.
-   *
-   * @param {string[]}inputToCheck - the input value to check.
-   * @throws {Error} - Throws error if array has more than 3 elements.
-   */
-  errorCheckArrayLength (inputToCheck) {
-    if (inputToCheck.length > 3) {
-      throw new Error('You can only fetch 3 chords at a time')
-    }
-  }
-
-  /**
    * Cheks if input is of type number.
    *
    * @param {number} inputToCheck - the input value to check.

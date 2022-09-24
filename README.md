@@ -1,6 +1,6 @@
-# Chord-Calculator
+# Chord-provider
 
-Chord-calcualtor is a module that handles guitar chords. It uses https://api.uberchord.com/ to fetch chords and deliver them as javascript objects.
+Chord-Provider is a module that handles guitar chords. It uses https://api.uberchord.com/ to fetch chords and deliver them as javascript objects.
 The module also provides the possibility for you to get the chord as a string with instructions (if you are a beginner in learning guitar), transpose chords to a new key and create a random song containing only chords in the key you choose.
 
 Chords to choose as input are:  
@@ -45,9 +45,9 @@ The module fetches data from https://api.uberchord.com/ and presents it as Javas
 Example shows import from app.js in the example-app folder.
 
 ````
-import { ChordCalculator } from '../src/js/chordCalculator.js'
+import { ChordProvider } from '../src/js/chordProvider.js'
 
-const chordCalculator = new ChordCalculator()
+const chordProvider = new ChordProvider()
 
 
   const chord = await chordCalculator.getChord('G')
@@ -73,8 +73,8 @@ Error Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
 ### Example
 
  ````
-  const chordCalculator = new ChordCalculator()
-  const chord = await chordCalculator.getChord('G')
+  const chordProvider = new ChordProvider()
+  const chord = await chordProvider.getChord('G')
   console.log('chord', chord)
  
  ````
@@ -92,8 +92,8 @@ Error Will be thrown if the array is empty/has more tha three elements/if the el
 ### Example
 
  ````
-  const chordCalculator = new ChordCalculator()
-  const chords = await chordCalculator.getChords(['G', 'D', 'Ab'])
+  const chordProvider = new ChordProvider()
+  const chords = await chordProvider.getChords(['G', 'D', 'Ab'])
   console.log('chords', chords)
  
  ````
@@ -111,8 +111,8 @@ Error Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
 ### Example
 
  ````
-  const chordCalculator = new ChordCalculator()
-  const chordString = await chordCalculator.getChordAsString('Bb')
+  const chordProvider = new ChordProvider()
+  const chordString = await chordProvider.getChordAsString('Bb')
   console.log('chordString', chordString)
  
  ````
@@ -130,8 +130,8 @@ Error Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
 ### Example
 
  ````
-  const chordCalculator = new ChordCalculator()
-  const similarChords = await chordCalculator.getSimilarChords('A')
+ const chordProvider = new ChordProvider()
+  const similarChords = await chordProvider.getSimilarChords('A')
   console.log('similarChords', similarChords)
  
  ````
@@ -150,8 +150,8 @@ Error Will be thrown if argument is not of type array/array is empty/chords isn�
 ### Example
 
  ````
-  const chordCalculator = new ChordCalculator()
-  const transposedChords = chordCalculator.transposeChords(['Bb', 'D', 'G'], 3)
+  const chordProvider = new ChordProvider()
+  const transposedChords = chordProvider.transposeChords(['Bb', 'D', 'G'], 3)
   console.log('transposedChords', transposedChords)
  
  ````
@@ -169,8 +169,8 @@ Error Will be thrown if argument is not of type string/isn´t in CHORD_SCALE.
 ### Example
 
  ````
-  const chordCalculator = new ChordCalculator()
-  randomSongStructure = chordCalculator.getRandomSongStructure('C')
+  const chordProvider = new ChordProvider()
+  randomSongStructure = chordProvider.getRandomSongStructure('C')
   console.log('randomSongStructure', randomSongStructure)
  
  ````

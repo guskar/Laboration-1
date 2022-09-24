@@ -1,21 +1,21 @@
-import { ChordCalculator } from '../src/js/chordCalculator.js'
+import { ChordProvider } from '../src/js/chordProvider.js'
 
-const chordCalculator = new ChordCalculator()
+const chordProvider = new ChordProvider()
 
 try {
-  // const chord = await chordCalculator.getChord('G')
-  const chordString = await chordCalculator.getChordAsString('Bb')
-  // const chords = await chordCalculator.getChords(['G', 'F', 'Ab'])
-  // const similarChords = await chordCalculator.getSimilarChords('A')
-  // const transposedChords = chordCalculator.getTransposedChords(['Bb', 'D', 'G'], 4)
-  const randomSongStructure = chordCalculator.getRandomSongStructure('Db')
+  // const chord = await chordProvider.getChord('G')
+  // const chordString = await chordProvider.getChordAsString('Bb')
+  const chords = await chordProvider.getChords(['G', 'F', 'Ab', 'D', 'E'])
+  // const similarChords = await chordProvider.getSimilarChords('A')
+  // const transposedChords = chordProvider.getTransposedChords(['Bb', 'D', 'G'], 4)
+  // const randomSongStructure = chordProvider.getRandomSongStructure('Db')
 
   // console.log('chord', chord)
-  console.log('chordString', chordString)
-  // console.log('chords', chords)
+  // console.log('chordString', chordString)
+  console.log('chords', chords)
   // console.log('similarChords', similarChords)
   // console.log('transposedChords', transposedChords)
-  console.log('randomSongStructure', randomSongStructure)
+  // console.log('randomSongStructure', randomSongStructure)
 } catch (error) {
   console.log(error.message)
 }
