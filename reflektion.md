@@ -10,4 +10,6 @@ Namnändringar på funktioner och variabler har också kommit naturligare under 
 
 Vad det gäller abstraktionsnivåer som tas upp i boken tycker jag ibland att det är svårt att hålla sig till detta. I min kod blandar jag exempelvis olika koncept såsom att slumpa nummer och formatera ett objekt jag vill returnera i samma metod. Så där finns det absolut mer att göra vad det gäller att bryta ut kod.
 
+Exempelvis landade jag i att ha en helperFunktions men eftersom där bara finns koncept som har med att formatera eller skapa objekt, så hade det istället kunnat vara en creator klass som enbart har detta ansvar.
+
 Eftersom uppgiften också till stor del handlar om att kommunicera informationen om biblioteket till en programmerare så har jag blivit mer medveten om dokumentationens vikt. Exempelvis känns en ordlista med områdesspecifika ord viktig för att förstå mitt bibliotek. En tydlig instruktion av hur biblioteket används blir också av största vikt för att göra det lätt att återanvända koden.
