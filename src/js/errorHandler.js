@@ -1,9 +1,18 @@
-import { CHORD_SCALE } from './helperFunctions.js'
+import { ChordPicker } from './chordPicker.js'
 
 /**
  * An error class responsible for throwing errors.
  */
 export class ErrorHandler {
+  chordPicker
+
+  /**
+   * The constructor of the ChordPicker class.
+   */
+  constructor () {
+    this.chordPicker = new ChordPicker()
+  }
+
   /**
    * Cheks if input is of type string.
    *
@@ -57,7 +66,7 @@ export class ErrorHandler {
    * @throws {Error} - Throws error input isn´t isn´t in CHORD_SCALE array.
    */
   errorCheckChord (inputToCheck) {
-    if (!CHORD_SCALE.includes(inputToCheck)) {
+    if (!this.chordPicker.CHORD_SCALE.includes(inputToCheck)) {
       throw new Error('The input has to be one of the elements in CHORD_SCALE')
     }
   }

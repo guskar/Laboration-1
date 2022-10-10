@@ -1,7 +1,8 @@
 
 import { Fetcher } from './fetcher.js'
 import { ErrorHandler } from './errorHandler.js'
-import { createTransposedChordsArr, createChordsThatFitsInKeyArr, createChordStructureObject, createStringFromChordObject } from './helperFunctions.js'
+import { ChordPicker } from './chordPicker.js'
+import { StringFormatter } from './stringFormatter.js'
 
 /**
  * The chordCalculator class.
@@ -10,6 +11,8 @@ export class ChordProvider {
   #errorHandler
   #fetcher
   #data
+  #stringFormatter
+  #chordPicker
   /**
    * Creates an instance of the current object.
    */
@@ -17,6 +20,8 @@ export class ChordProvider {
     this.#errorHandler = new ErrorHandler()
     this.#fetcher = new Fetcher()
     this.#data = {}
+    this.#stringFormatter = new StringFormatter()
+    this.#chordPicker = new ChordPicker()
   }
 
   /**
@@ -68,7 +73,8 @@ export class ChordProvider {
   async getChordAsString (chord) {
     this.#errorHandler.errorCheckString(chord)
     this.#data = await this.#fetcher.fetchData(`https://api.uberchord.com/v1/chords/${chord}`)
-    return createStringFromChordObject(this.#data)
+    const chordFormattedAsString = this.#stringFormatter.createStringFromChordObject(this.#data)
+    return chordFormattedAsString
   }
 
   /**
@@ -81,7 +87,7 @@ export class ChordProvider {
   getTransposedChords (chordArr, stepsToTranspose) {
     this.#errorHandler.errorCheckArray(chordArr)
     this.#errorHandler.errorCheckNumber(stepsToTranspose)
-    const transposedChordsArr = createTransposedChordsArr(chordArr, stepsToTranspose)
+    const transposedChordsArr = this.#chordPicker.createTransposedChordsArr(chordArr, stepsToTranspose)
 
     return transposedChordsArr
   }
@@ -95,8 +101,8 @@ export class ChordProvider {
   getRandomSongStructure (keyChord) {
     this.#errorHandler.errorCheckString(keyChord)
     this.#errorHandler.errorCheckChord(keyChord)
-    const chordsThatFitsInKey = createChordsThatFitsInKeyArr(keyChord)
-    const chordStructureObject = createChordStructureObject(chordsThatFitsInKey)
+    const chordsThatFitsInKey = this.#chordPicker.createChordsThatFitsInKeyArr(keyChord)
+    const chordStructureObject = this.#chordPicker.createChordStructureObject(chordsThatFitsInKey)
 
     return chordStructureObject
   }

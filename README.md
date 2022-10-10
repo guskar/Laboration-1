@@ -53,7 +53,7 @@ import { ChordProvider } from '../src/js/chordProvider.js'
 const chordProvider = new ChordProvider()
 
 
-  const chord = await chordCalculator.getChord('G')
+  const chord = await chordProvider.getChord('G')
   
 
   console.log('chord', chord)
