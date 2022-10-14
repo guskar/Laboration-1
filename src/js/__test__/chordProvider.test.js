@@ -1,8 +1,9 @@
 
 import { ChordProvider } from '../chordProvider.js'
-import { createChordsThatFitsInKeyArr } from '../helperFunctions.js'
+import { ChordPicker } from '../chordPicker.js'
 
 const chordProvider = new ChordProvider()
+const chordPicker = new ChordPicker()
 
 test('chordObject assignment', async () => {
   const chordObject = await chordProvider.getChord('G')
@@ -66,7 +67,7 @@ test('transposedChordsArray assignment to throw error', () => {
 
 test('songStructureObject assignment', () => {
   const chordObject = chordProvider.getRandomSongStructure('C')
-  const chordsThatFitsInKeyArray = createChordsThatFitsInKeyArr('C')
+  const chordsThatFitsInKeyArray = chordPicker.createChordsThatFitsInKeyArr('C')
   const keys = Object.keys(chordObject)
   for (const value in keys) {
     for (let i = 0; i < value.length; i++) {
@@ -81,7 +82,7 @@ test('songStructureObject assignment to throw error', () => {
 })
 
 test('chordsThatFitsInKeyArray assignment', () => {
-  const chordsThatFitsInKey = createChordsThatFitsInKeyArr('C')
+  const chordsThatFitsInKey = chordPicker.createChordsThatFitsInKeyArr('C')
   expect(chordsThatFitsInKey).toEqual(['C', 'F', 'G', 'A_m'])
 })
 
