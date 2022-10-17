@@ -28,7 +28,7 @@ Förtydligande: Examinator kommer sätta betyg oberoende på vad ni anser.
 [Readme](README.md)
 
 ## Beskrivning av min kod
-Mitt biliotek är uppbyggt av en huvudklass vid namn ChordCalcualtor innehållande 6 st publika metoder som i sin tur använder sig av en fetcherklass, errorHandlerklass samt helperFunctions.js
+Mitt biliotek är uppbyggt av en huvudklass vid namn ChordCalcualtor innehållande 6 st publika metoder som i sin tur använder sig av en fetcherklass, errorHandlerklass, chordPicker, stringFormatter.
 
 [Readme](README.md)
 
